@@ -1,0 +1,11 @@
+// .devcontainer/devcontainer.json
+{
+  "name": "pybind-limited",
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind"
+  ],
+  "workspaceFolder": "/workspace"
+}
