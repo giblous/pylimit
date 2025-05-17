@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:25.04
 
 # --- базовая настройка окружения ---
 ENV DEBIAN_FRONTEND=noninteractive
@@ -25,5 +25,3 @@ ENV PATH="/opt/venv/bin:$PATH"
 # Установим wheel чтобы избежать ошибок при pip install
 RUN pip install --upgrade pip setuptools wheel
 
-# Рабочая директория
-WORKDIR /workspace
