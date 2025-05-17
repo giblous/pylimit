@@ -19,12 +19,14 @@ typedef struct {
 extern "C" {
 
 static void MyClass_dealloc(PyObject* self) {
+    std::cout << "Dealloc of MyClass object\n";
     const auto* obj = reinterpret_cast<PyMyClass *>(self);
     delete obj->cpp_obj;
     PyObject_Free(self);
 }
 
 static PyObject* MyClass_new(PyTypeObject* type, PyObject* args, PyObject* kwds) {
+    std::cout << "New of MyClass\n";
     PyMyClass* self = PyObject_New(PyMyClass, type);
     if (!self) return nullptr;
     self->cpp_obj = nullptr;
@@ -32,6 +34,7 @@ static PyObject* MyClass_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 }
 
 static int MyClass_init(PyObject* self, PyObject* args, PyObject* kwds) {
+    std::cout << "Init of MyClass\n";
     const char* name = nullptr;
     if (!PyArg_ParseTuple(args, "s", &name))
         return -1;
@@ -40,6 +43,7 @@ static int MyClass_init(PyObject* self, PyObject* args, PyObject* kwds) {
 }
 
 static PyObject* MyClass_hello(PyObject* self, PyObject* Py_UNUSED(ignored)) {
+    std::cout << "Hello of MyClass\n";
     MyClass* obj = ((PyMyClass*)self)->cpp_obj;
     return PyUnicode_FromString(obj->hello().c_str());
 }
